@@ -1,0 +1,26 @@
+{
+  "name": "tabinput",
+  "description": "Date Input with tab complete",
+  "version": "0.0.1",
+  "author": "Brian Egizi <me@brianegizi.com>",
+  "homepage": "http://brianegizi.com/",
+  "main": [
+    "dist/tabinput.min.css",
+    "dist/tabinput.min.js"
+  ],
+  "repository": "https://github.com/begizi/jquery.tabinput.git",
+  "keywords": [
+    "jquery",
+    "input",
+    "tab"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-clean": "^0.3.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-jshint": "^1.8.4",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^0.3.1"
+  }
+}

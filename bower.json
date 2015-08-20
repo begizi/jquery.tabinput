@@ -1,0 +1,26 @@
+{
+  "name": "tabinput",
+  "version": "0.0.1",
+  "authors": [
+    "Brian Egizi <me@brianegizi.com>"
+  ],
+  "description": "Date Input with tab complete",
+  "main": [
+    "dist/tabinput.min.js",
+    "dist/tabinput.min.css"
+  ],
+  "keywords": [
+    "jquery",
+    "input",
+    "tab"
+  ],
+  "license": "MIT",
+  "homepage": "http://brianegizi.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
