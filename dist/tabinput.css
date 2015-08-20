@@ -1,0 +1,28 @@
+.tabinput {
+  margin: 0;
+  display: inline-block;
+  background-color: white;
+  border: 1px inset;
+  -webkit-appearance: textfield;
+  cursor: text;
+}
+
+.tabinput .tabinput-seperator {
+  margin-left: -0.2em;
+}
+
+.tabinput input {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background-color: transparent;
+  padding: 2px;
+  margin: 0;
+  max-width: inherit;
+}
+
+.tabinput input[type=number]::-webkit-inner-spin-button,
+.tabinput input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
