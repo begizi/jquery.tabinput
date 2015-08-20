@@ -10,7 +10,6 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify');
 
 
-var pkg = require('./package.json');
 var banner = ['/**',
   ' * <%= pkg.name %> - <%= pkg.description %>',
   ' * @version v<%= pkg.version %>',
@@ -20,12 +19,14 @@ var banner = ['/**',
   ''].join('\n');
 
 gulp.task('header-css', function() {
+  var pkg = require('./package.json');
   return gulp.src('src/*.css')
     .pipe(header(banner, {pkg: pkg}))
     .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('header-js', function() {
+  var pkg = require('./package.json');
   return gulp.src('src/*.js')
     .pipe(header(banner, {pkg: pkg}))
     .pipe(gulp.dest('./dist/'));
