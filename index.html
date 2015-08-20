@@ -4,17 +4,24 @@
     <meta charset="utf-8">
     <title>HTML5 Tabinput jQuery Plugin</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="dist/jquery.tabinput.css">
+    <link rel="stylesheet" href="src/tabinput.css">
   </head>
   <body>
-    <input id="nonedate" />
-    <input id="dateinput" name="date" class="" />
+    <div class="container">
+      <h2>HTML5 Tabinput jQuery Plugin</h2>
+      <div class="col-lg-3">
+        <input id="dateinput" name="date" class="form-control" value="01/01/2015" />
+      </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="dist/jquery.tabinput.js"></script>
+    <script src="src/tabinput.js"></script>
     <script>
       $(function() {
         // Invoke the plugin
-        $('#dateinput').tabinput({});
+        var dateInput = $('#dateinput').tabinput({
+          format: "MM/DD/YYYY",
+          seperator: "/"
+        });
       });
     </script>
   </body>
