@@ -18,12 +18,14 @@
 
   function Tabinput(input, options) {
     this.$input = $(input);
+    this.inputList = [];
 
     this.options = $.extend(true, {}, this.options, this.defaults, options);
 
     this.buildContainer();
     this.processFormat();
     this.buildInputList();
+    this.setInputs(this.$input.val());
 
     // Hide the original input and add the tabinput input
     this.$input.hide().after(this.$container);
@@ -68,7 +70,7 @@
 
     buildInputList: function() {
       var self = this;
-      this.inputBlocks.forEach(function(block, i) {
+      this.inputList = this.inputBlocks.map(function(block, i) {
         var input = self.buildInput(block.length);
 
         self.$container.append(input);
@@ -77,6 +79,8 @@
         if (i !== self.numInputs-1) {
           self.$container.append(self.buildSeperator());
         }
+
+        return input;
 
       });
     },
@@ -113,6 +117,8 @@
         if ($input.val().length === size) {
           $input.nextAll('input').first().focus().select();
         }
+
+        self.pushVal();
       });
 
       return $input;
@@ -125,17 +131,22 @@
     },
 
     setInputs: function(value) {
+      var valBlocks = value.split(this.options.seperator);
+
+      this.inputList.forEach(function(input, i) {
+        input.val(valBlocks[i]);
+      });
+
       // Set inputs to original input
       this.$input.val(value);
     },
 
-    val: function(value) {
-      if (typeof value !== 'undefined') {
-        this.setInputs(value);
-        return this.$input;
-      } else {
-        return this.$input.val();
-      }
+    pushVal: function() {
+      var val = this.inputList.map(function(input) {
+        return input.val();
+      });
+
+      this.$input.val(val.join(this.options.seperator), true);
     }
   };
 
