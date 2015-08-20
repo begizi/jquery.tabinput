@@ -1,9 +1,27 @@
 var gulp = require('gulp'),
+    argv = require('yargs').argv,
+    bump = require('gulp-bump'),
     clean = require('gulp-clean'),
     jshint = require('gulp-jshint'),
     rename = require('gulp-rename'),
     cssmin = require('gulp-cssmin'),
     uglify = require('gulp-uglify');
+
+gulp.task('bump', function() {
+  var version = argv.version;
+  var type = argv.type || "Major";
+  var bumpTo = {};
+
+  if (version !== undefined) {
+    bumpTo.version = version;
+  } else {
+    bumpTo.type = type;
+  }
+
+  gulp.src(['./package.json', './bower.json'])
+    .pipe(bump(bumpTo))
+    .pipe(gulp.dest('./'));
+});
 
 gulp.task('clean', function() {
   return gulp.src('dist', {read: false})
@@ -44,4 +62,4 @@ gulp.task('default', function() {
     gulp.start('lint', 'release');
 });
 
-gulp.task('release', ['clean', 'css', 'js', 'copy']);
+gulp.task('release', ['clean', 'bump', 'css', 'js', 'copy']);
