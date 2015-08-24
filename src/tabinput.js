@@ -25,7 +25,7 @@
     this.buildContainer();
     this.processFormat();
     this.buildInputList();
-    this.setInputs(this.$input.val());
+    this.val(this.$input.val());
 
     // Hide the original input and add the tabinput input
     this.$input.hide().after(this.$container);
@@ -145,15 +145,19 @@
       return seperator;
     },
 
-    setInputs: function(value) {
-      var valBlocks = value.split(this.options.seperator);
+    val: function(value) {
+      if (value !== undefined) {
+        var valBlocks = value.split(this.options.seperator);
 
-      this.inputList.forEach(function(input, i) {
-        input.val(valBlocks[i]);
-      });
+        this.inputList.forEach(function(input, i) {
+          input.val(valBlocks[i]);
+        });
 
-      // Set inputs to original input
-      this.$input.val(value);
+        // Set inputs to original input
+        return this.$input.val(value);
+      } else {
+        return this.$input.val();
+      }
     },
 
     pushVal: function() {
