@@ -39,6 +39,7 @@
       seperator: '-',
       type: 'text',
       replace: /[^a-zA-Z0-9]/g,
+      placeholder: true,
       templates: {
         inputContainer: '<div class="tabinput"></div>',
         inputs: '<input type="text" class="tabinput-input" />',
@@ -71,7 +72,7 @@
     buildInputList: function() {
       var self = this;
       this.inputList = this.inputBlocks.map(function(block, i) {
-        var input = self.buildInput(block.length);
+        var input = self.buildInput(block.length, block);
 
         self.$container.append(input);
 
@@ -85,13 +86,16 @@
       });
     },
 
-    buildInput: function(size) {
+    buildInput: function(size, block) {
       var self = this;
       var $input = $(this.options.templates.inputs);
       $input.attr('size', size);
       $input.attr('maxlength', size);
       $input.attr('type', self.options.type);
 
+      if (self.options.placeholder) {
+        $input.attr('placeholder', block);
+      }
 
       if (self.options.type === 'number') {
         $input.attr('min', 0);
