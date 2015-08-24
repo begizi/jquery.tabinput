@@ -171,8 +171,9 @@
     }
   };
 
-  $.fn.tabinput = function(option) {
-    return this.each(function () {
+  $.fn.tabinput = function(option, parameter, extraOptions) {
+    var value;
+    var chain = this.each(function () {
       var $this = $(this);
       var data = $this.data('tabinput');
       var options = typeof option === 'object' && option;
@@ -182,7 +183,24 @@
         data = new Tabinput(this, options);
         $this.data('tabinput', data);
       }
+
+      // Call tabinput method
+      if (typeof option === 'string' && data[option] instanceof Function) {
+        value = data[option](parameter, extraOptions);
+
+        if (option === 'destroy') {
+          $(this).data('tabinput', false);
+        }
+      }
+
     });
+
+    // Return the value if method was called and has a return
+    if (value !== undefined) {
+      return value;
+    }
+
+    return chain;
   };
 
 }));
