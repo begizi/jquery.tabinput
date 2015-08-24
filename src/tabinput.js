@@ -90,10 +90,10 @@
     buildInput: function(size, block) {
       var self = this;
       var $input = $(this.options.templates.inputs);
-      $input.attr('size', size);
       $input.attr('maxlength', size);
       $input.attr('type', self.options.type);
       $input.css({
+        width: size+'em',
         textAlign: self.options.textAlign
       });
 
