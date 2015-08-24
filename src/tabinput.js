@@ -40,6 +40,7 @@
       type: 'text',
       replace: /[^a-zA-Z0-9]/g,
       textAlign: 'left',
+      cursor: 'text',
       placeholder: true,
       templates: {
         inputContainer: '<div class="tabinput"></div>',
@@ -54,6 +55,11 @@
 
       // Get css classes from original input
       self.$container.addClass(self.$input.attr('class'));
+
+      // Set css options
+      self.$container.css({
+        cursor: self.options.cursor
+      });
 
       // Listen for container clicks and focus the input
       self.$container.on('click', function(e) {
@@ -94,6 +100,7 @@
       $input.attr('type', self.options.type);
       $input.css({
         width: size+'em',
+        cursor: self.options.cursor,
         textAlign: self.options.textAlign
       });
 
