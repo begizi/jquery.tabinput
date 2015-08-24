@@ -162,6 +162,12 @@
       });
 
       this.$input.val(val.join(this.options.seperator), true);
+    },
+
+    destroy: function() {
+      this.$container.remove();
+      this.$input.show();
+      this.$input.data('tabinput', null);
     }
   };
 
