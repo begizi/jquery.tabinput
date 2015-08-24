@@ -1,6 +1,6 @@
 /**
  * tabinput - Date Input with tab complete
- * @version v1.0.0
+ * @version v1.1.0
  * @link http://brianegizi.com/
  * @license MIT
  */
@@ -31,7 +31,7 @@
     this.buildContainer();
     this.processFormat();
     this.buildInputList();
-    this.setInputs(this.$input.val());
+    this.val(this.$input.val());
 
     // Hide the original input and add the tabinput input
     this.$input.hide().after(this.$container);
@@ -151,15 +151,19 @@
       return seperator;
     },
 
-    setInputs: function(value) {
-      var valBlocks = value.split(this.options.seperator);
+    val: function(value) {
+      if (value !== undefined) {
+        var valBlocks = value.split(this.options.seperator);
 
-      this.inputList.forEach(function(input, i) {
-        input.val(valBlocks[i]);
-      });
+        this.inputList.forEach(function(input, i) {
+          input.val(valBlocks[i]);
+        });
 
-      // Set inputs to original input
-      this.$input.val(value);
+        // Set inputs to original input
+        return this.$input.val(value);
+      } else {
+        return this.$input.val();
+      }
     },
 
     pushVal: function() {
@@ -168,11 +172,18 @@
       });
 
       this.$input.val(val.join(this.options.seperator), true);
+    },
+
+    destroy: function() {
+      this.$container.remove();
+      this.$input.show();
+      this.$input.data('tabinput', null);
     }
   };
 
-  $.fn.tabinput = function(option) {
-    return this.each(function () {
+  $.fn.tabinput = function(option, parameter, extraOptions) {
+    var value;
+    var chain = this.each(function () {
       var $this = $(this);
       var data = $this.data('tabinput');
       var options = typeof option === 'object' && option;
@@ -182,7 +193,24 @@
         data = new Tabinput(this, options);
         $this.data('tabinput', data);
       }
+
+      // Call tabinput method
+      if (typeof option === 'string' && data[option] instanceof Function) {
+        value = data[option](parameter, extraOptions);
+
+        if (option === 'destroy') {
+          $(this).data('tabinput', false);
+        }
+      }
+
     });
+
+    // Return the value if method was called and has a return
+    if (value !== undefined) {
+      return value;
+    }
+
+    return chain;
   };
 
 }));
