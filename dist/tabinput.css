@@ -1,6 +1,6 @@
 /**
  * tabinput - Date Input with tab complete
- * @version v0.0.3
+ * @version v1.0.0
  * @link http://brianegizi.com/
  * @license MIT
  */
@@ -10,13 +10,12 @@
   background-color: white;
   border: 1px inset;
   -webkit-appearance: textfield;
-  cursor: text;
   white-space: nowrap;
   max-width: 100%;
-}
-
-.tabinput .tabinput-seperator {
-  margin-left: -0.2em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .tabinput input {
@@ -24,7 +23,6 @@
   box-shadow: none;
   outline: none;
   background-color: transparent;
-  padding: 2px;
   margin: 0;
   max-width: inherit;
 }

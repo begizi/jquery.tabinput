@@ -1,7 +1,7 @@
 {
   "name": "tabinput",
   "description": "Date Input with tab complete",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "author": "Brian Egizi <me@brianegizi.com>",
   "homepage": "http://brianegizi.com/",
   "main": [

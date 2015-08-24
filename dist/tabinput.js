@@ -1,6 +1,6 @@
 /**
  * tabinput - Date Input with tab complete
- * @version v0.0.3
+ * @version v1.0.0
  * @link http://brianegizi.com/
  * @license MIT
  */
@@ -45,6 +45,9 @@
       seperator: '-',
       type: 'text',
       replace: /[^a-zA-Z0-9]/g,
+      textAlign: 'left',
+      cursor: 'text',
+      placeholder: true,
       templates: {
         inputContainer: '<div class="tabinput"></div>',
         inputs: '<input type="text" class="tabinput-input" />',
@@ -58,6 +61,11 @@
 
       // Get css classes from original input
       self.$container.addClass(self.$input.attr('class'));
+
+      // Set css options
+      self.$container.css({
+        cursor: self.options.cursor
+      });
 
       // Listen for container clicks and focus the input
       self.$container.on('click', function(e) {
@@ -77,7 +85,7 @@
     buildInputList: function() {
       var self = this;
       this.inputList = this.inputBlocks.map(function(block, i) {
-        var input = self.buildInput(block.length);
+        var input = self.buildInput(block.length, block);
 
         self.$container.append(input);
 
@@ -91,13 +99,20 @@
       });
     },
 
-    buildInput: function(size) {
+    buildInput: function(size, block) {
       var self = this;
       var $input = $(this.options.templates.inputs);
-      $input.attr('size', size);
       $input.attr('maxlength', size);
       $input.attr('type', self.options.type);
+      $input.css({
+        width: size+'em',
+        cursor: self.options.cursor,
+        textAlign: self.options.textAlign
+      });
 
+      if (self.options.placeholder) {
+        $input.attr('placeholder', block);
+      }
 
       if (self.options.type === 'number') {
         $input.attr('min', 0);
