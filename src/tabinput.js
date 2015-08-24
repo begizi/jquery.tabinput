@@ -39,6 +39,7 @@
       seperator: '-',
       type: 'text',
       replace: /[^a-zA-Z0-9]/g,
+      textAlign: 'left',
       placeholder: true,
       templates: {
         inputContainer: '<div class="tabinput"></div>',
@@ -92,6 +93,9 @@
       $input.attr('size', size);
       $input.attr('maxlength', size);
       $input.attr('type', self.options.type);
+      $input.css({
+        textAlign: self.options.textAlign
+      });
 
       if (self.options.placeholder) {
         $input.attr('placeholder', block);
