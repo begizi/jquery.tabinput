@@ -7,13 +7,14 @@ A simple jQuery plugin for adding tabable sections to an input box.
 ## Usage
 
     $('input').tabinput({
-      format: 'MM/DD/YYYY',   //Default: 'ABC-DEF-GHI'
-      seperator: '/',         //Default: '-'
-      type: 'text',           //Default: 'text'
-      replace: /[^0-9]/g,     //Default: /[^a-zA-Z0-9]/g
+      format: 'MM/DD/YYYY',   //Default: 'MM/DD/YYYY'
+      seperator: '/',         //Default: '/'
+      filter: /[^0-9]/g,      //Default: false
       textAlign: 'center',    //Default: 'left'
       cursor: 'default',      //Default: 'text'
-      placeholder: true       //Default: true
+      placeholder: true,      //Default: true
+      charWidth: 1,           //Default: 0.6
+      widthUnit: 'em'         //Default: 'em'
     });
 
 ## Developing
