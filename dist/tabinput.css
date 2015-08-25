@@ -1,6 +1,6 @@
 /**
  * tabinput - Date Input with tab complete
- * @version v1.1.0
+ * @version v1.2.0
  * @link http://brianegizi.com/
  * @license MIT
  */
@@ -12,23 +12,14 @@
   -webkit-appearance: textfield;
   white-space: nowrap;
   max-width: 100%;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
-.tabinput input {
+.tabinput [contenteditable] {
+  display: inline-block;
   border: none;
   box-shadow: none;
   outline: none;
   background-color: transparent;
   margin: 0;
   max-width: inherit;
-}
-
-.tabinput input[type=number]::-webkit-inner-spin-button,
-.tabinput input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
 }
