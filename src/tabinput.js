@@ -37,14 +37,15 @@
     defaults: {
       format: 'ABC-DEF-GHI',
       seperator: '-',
-      type: 'text',
       replace: /[^a-zA-Z0-9]/g,
       textAlign: 'left',
       cursor: 'text',
       placeholder: true,
+      charWidth: 0.6,
+      widthUnit: 'em',
       templates: {
         inputContainer: '<div class="tabinput"></div>',
-        inputs: '<input type="text" class="tabinput-input" />',
+        inputs: '<div class="tabinput-input" contenteditable="true" />',
         seperator: '<span class="tabinput-seperator"></span>'
       }
     },
@@ -65,8 +66,8 @@
       self.$container.on('click', function(e) {
         var $target = $(e.target);
         // Focus and select the first input
-        if (!$target.is('input')) {
-          self.$container.find('input:first').focus().select();
+        if (!$target.is('[contenteditable]')) {
+          self.$container.find('[contenteditable]:first').focus().selectAllContent();
         }
       });
     },
@@ -96,41 +97,47 @@
     buildInput: function(size, block) {
       var self = this;
       var $input = $(this.options.templates.inputs);
-      $input.attr('maxlength', size);
-      $input.attr('type', self.options.type);
       $input.css({
-        width: size+'em',
+        minWidth: (size * self.options.charWidth) + self.options.widthUnit,
         cursor: self.options.cursor,
         textAlign: self.options.textAlign
       });
 
       if (self.options.placeholder) {
-        $input.attr('placeholder', block);
-      }
-
-      if (self.options.type === 'number') {
-        $input.attr('min', 0);
-        $input.attr('max', new Array(size+1).join('9'));
+        $input.text(block);
       }
 
       // Setup events
       $input.on('click', function(e) {
         var $target = $(e.target);
-        $target.focus().select();
+        $target.focus().selectAllContent();
       });
 
-      $input.on('input', function(e) {
-        if (/^(9|13|16|27|37|38|39|40)$/.test(e.which)) {
+      $input.on('focus', function() {
+        $(this).selectAllContent();
+      });
+
+      $input.on('input', function() {
+        // Run the value through the formatter
+        if (self.options.replace) {
+          this.textContent = this.textContent.replace(self.options.replace, '');
+          $input.selectEndContent();
+        }
+
+        // Replace an empty input with placeholders
+        if (this.textContent.length === 0 && self.options.placeholder) {
+          this.textContent = block;
+          $input.selectAllContent();
           return;
         }
 
-        // Run the value through the formatter
-        if (self.options.replace) {
-          this.value = this.value.replace(self.options.replace, '');
+        // limit the input to the block size
+        if (this.textContent.length > size) {
+          this.textContent = this.textContent.substring(0, size);
         }
 
-        if ($input.val().length === size) {
-          $input.nextAll('input').first().focus().select();
+        if (this.textContent.length === size) {
+          $input.nextAll('[contenteditable]').first().focus().selectAllContent();
         }
 
         self.pushVal();
@@ -146,11 +153,11 @@
     },
 
     val: function(value) {
-      if (value !== undefined) {
+      if (value !== undefined && value !== '') {
         var valBlocks = value.split(this.options.seperator);
 
         this.inputList.forEach(function(input, i) {
-          input.val(valBlocks[i]);
+          input.text(valBlocks[i]);
         });
 
         // Set inputs to original input
@@ -162,7 +169,7 @@
 
     pushVal: function() {
       var val = this.inputList.map(function(input) {
-        return input.val();
+        return input.text();
       });
 
       this.$input.val(val.join(this.options.seperator), true);
@@ -172,6 +179,43 @@
       this.$container.remove();
       this.$input.show();
       this.$input.data('tabinput', null);
+    }
+  };
+
+  // Select contenteditable helper function
+  $.fn.selectAllContent = function(){
+    var element = this[0];
+    var select = function() {
+      if (element && window.getSelection) {
+        var selection = window.getSelection();
+        var range = document.createRange();
+        range.selectNodeContents(element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    };
+
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(function() {
+        select();
+      });
+    } else {
+      setTimeout(function() {
+        select();
+      }, 0);
+    }
+  };
+
+  $.fn.selectEndContent = function() {
+    var element = this[0];
+    if (element && element.childNodes.length > 0 && window.getSelection) {
+      var selection = window.getSelection();
+      var range = document.createRange();
+      range.setStart(element.childNodes[0], element.childNodes[0].length);
+      range.collapse(true);
+      selection.removeAllRanges();
+      selection.addRange(range);
+      element.focus();
     }
   };
 
