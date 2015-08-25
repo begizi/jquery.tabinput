@@ -160,7 +160,11 @@
         }
 
         if (this.textContent.length === size) {
-          $input.nextAll('[contenteditable]').first().focus().selectAllContent();
+          var next = $input.nextAll('[contenteditable]').first();
+          if (next.length === 0) {
+            next = $input;
+          }
+          next.focus().selectAllContent();
         }
 
         self.pushVal();
