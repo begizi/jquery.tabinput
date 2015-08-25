@@ -35,8 +35,8 @@
     constructor: Tabinput,
 
     defaults: {
-      format: 'ABC-DEF-GHI',
-      seperator: '-',
+      format: 'MM/DD/YYYY',
+      seperator: '/',
       filter: false,
       textAlign: 'left',
       cursor: 'text',
