@@ -37,7 +37,7 @@
     defaults: {
       format: 'ABC-DEF-GHI',
       seperator: '-',
-      replace: /[^a-zA-Z0-9]/g,
+      filter: false,
       textAlign: 'left',
       cursor: 'text',
       placeholder: true,
@@ -119,8 +119,8 @@
 
       $input.on('input', function() {
         // Run the value through the formatter
-        if (self.options.replace) {
-          this.textContent = this.textContent.replace(self.options.replace, '');
+        if (self.options.filter) {
+          this.textContent = this.textContent.replace(self.options.filter, '');
           $input.selectEndContent();
         }
 
