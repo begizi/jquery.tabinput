@@ -117,6 +117,13 @@
         $(this).selectAllContent();
       });
 
+      $input.on('keydown', function(e) {
+        // Disable Enter, Left, Up, Right, Down
+        if (/^(13|37|38|39|40)$/.test(e.which)) {
+          return e.preventDefault();
+        }
+      });
+
       $input.on('input', function() {
         // Run the value through the formatter
         if (self.options.filter) {
