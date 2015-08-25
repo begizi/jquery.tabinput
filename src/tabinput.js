@@ -43,6 +43,7 @@
       placeholder: true,
       charWidth: 0.6,
       widthUnit: 'em',
+      arrowKeys: true,
       templates: {
         inputContainer: '<div class="tabinput"></div>',
         inputs: '<div class="tabinput-input" contenteditable="true" />',
@@ -118,7 +119,22 @@
       });
 
       $input.on('keydown', function(e) {
-        // Disable Enter, Left, Up, Right, Down
+        // Use arrows for section switching if enabled
+        if (self.options.arrowKeys && /^(37|38|39|40)$/.test(e.which)) {
+          switch (e.which) {
+            case 37:
+              $input.prevAll('[contenteditable]').first().focus().selectAllContent();
+              break;
+            case 39:
+              $input.nextAll('[contenteditable]').first().focus().selectAllContent();
+              break;
+            case 38:
+            case 40:
+              break;
+          }
+        }
+
+        // Disable Enter, Left, Up, Down, Right
         if (/^(13|37|38|39|40)$/.test(e.which)) {
           return e.preventDefault();
         }
