@@ -1,6 +1,6 @@
 /**
  * tabinput - Date Input with tab complete
- * @version v1.2.0
+ * @version v1.2.1
  * @link http://brianegizi.com/
  * @license MIT
  */
@@ -22,4 +22,5 @@
   background-color: transparent;
   margin: 0;
   max-width: inherit;
+  white-space: nowrap;
 }

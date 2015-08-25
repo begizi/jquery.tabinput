@@ -1,6 +1,6 @@
 /**
  * tabinput - Date Input with tab complete
- * @version v1.2.0
+ * @version v1.2.1
  * @link http://brianegizi.com/
  * @license MIT
  */
@@ -121,6 +121,13 @@
 
       $input.on('focus', function() {
         $(this).selectAllContent();
+      });
+
+      $input.on('keydown', function(e) {
+        // Disable Enter, Left, Up, Right, Down
+        if (/^(13|37|38|39|40)$/.test(e.which)) {
+          return e.preventDefault();
+        }
       });
 
       $input.on('input', function() {
