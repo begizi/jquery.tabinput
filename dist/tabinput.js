@@ -1,6 +1,6 @@
 /**
  * tabinput - Date Input with tab complete
- * @version v1.3.0
+ * @version v1.3.1
  * @link http://brianegizi.com/
  * @license MIT
  */
@@ -157,7 +157,7 @@
         if (this.textContent.length === 0 && self.options.placeholder) {
           this.textContent = block;
           $input.selectAllContent();
-          return;
+          return self.pushVal();
         }
 
         // limit the input to the block size
