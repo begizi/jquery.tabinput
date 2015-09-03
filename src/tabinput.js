@@ -151,7 +151,7 @@
         if (this.textContent.length === 0 && self.options.placeholder) {
           this.textContent = block;
           $input.selectAllContent();
-          return;
+          return self.pushVal();
         }
 
         // limit the input to the block size
