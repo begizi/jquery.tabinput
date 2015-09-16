@@ -10,21 +10,45 @@
     <div class="container">
       <h2>HTML5 Tabinput jQuery Plugin</h2>
       <div class="col-lg-3">
-        <input id="dateinput" name="date" class="form-control" value="01/01/2015" />
+        <input id="tabinput-date1" class="form-control" value="01/01/2015" />
+      </div>
+      <div class="col-lg-3">
+        <input id="tabinput-date2" class="form-control" placeholder="YYYY-MM-DD" />
+      </div>
+      <div class="col-lg-3">
+        <input id="tabinput-cc1" class="form-control"/>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="src/tabinput.js"></script>
     <script>
       $(function() {
-        // Invoke the plugin
-        var dateInput = $('#dateinput').tabinput({
+        // Invoke the plugins
+        $('#tabinput-date1').tabinput({
           format: "MM/DD/YYYY",
           seperator: "/",
           textAlign: "left",
           filter: /[^0-9]/g,
           cursor: "default"
         });
+
+        $('#tabinput-date2').tabinput({
+          format: "YYYY-MM-DD",
+          seperator: "-",
+          textAlign: "left",
+          filter: /[^0-9]/g,
+          cursor: "default"
+        });
+
+        $('#tabinput-cc1').tabinput({
+          format: "0000 0000 0000 0000",
+          placeholder: false,
+          seperator: " ",
+          charWidth: 0,
+          filter: /[^0-9]/g,
+          cursor: "default"
+        });
+
       });
     </script>
   </body>
