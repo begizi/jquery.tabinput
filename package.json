@@ -8,6 +8,11 @@
     "dist/tabinput.min.css",
     "dist/tabinput.min.js"
   ],
+  "scripts": {
+    "start": "http-server -p 8080",
+    "test": "cypress run",
+    "ci": "cypress ci"
+  },
   "repository": "https://github.com/begizi/jquery.tabinput.git",
   "keywords": [
     "jquery",
@@ -16,6 +21,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "cypress": "^0.6.0",
     "gulp": "^3.8.7",
     "gulp-bump": "^0.3.1",
     "gulp-clean": "^0.3.1",
@@ -24,6 +30,7 @@
     "gulp-jshint": "^1.8.4",
     "gulp-rename": "^1.2.0",
     "gulp-uglify": "^0.3.1",
+    "http-server": "^0.8.0",
     "run-sequence": "^1.1.2",
     "yargs": "^3.20.0"
   }
