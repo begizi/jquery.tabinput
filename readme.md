@@ -1,6 +1,6 @@
 # Tabinput [![Build Status](https://travis-ci.org/begizi/jquery.tabinput.svg?branch=master)](https://travis-ci.org/begizi/jquery.tabinput)
 
-![](https://www.dropbox.com/s/9ckojygs73bc9zf/jquery.tabinput.gif?dl=0&raw=1)
+<img src="https://www.dropbox.com/s/9ckojygs73bc9zf/jquery.tabinput.gif?dl=0&raw=1" width="250px">
 
 A simple jQuery plugin for adding tabable sections to an input box.
 
