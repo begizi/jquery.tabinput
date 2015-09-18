@@ -28,7 +28,7 @@ describe 'jQuery Tabinput [003]', ->
         .get('#tabinput-date1').next().within ->
           cy
             .get('.tabinput-input').eq(0).its('text').should('eq', '01')
-            .get('.tabinput-input').eq(1).its('text').should('eq', '01')
+            .get('.tabinput-input').eq(1).its('text').should('eq', '31')
             .get('.tabinput-input').eq(2).its('text').should('eq', '2015')
 
         # Has Placeholder
@@ -37,3 +37,18 @@ describe 'jQuery Tabinput [003]', ->
             .get('.tabinput-input').eq(0).its('text').should('eq', 'YYYY')
             .get('.tabinput-input').eq(1).its('text').should('eq', 'MM')
             .get('.tabinput-input').eq(2).its('text').should('eq', 'DD')
+
+  context 'First date input field [014]', ->
+    it 'it should be able to navigate blocks with the arrow keys [015]', ->
+      cy
+        .get('#tabinput-date1').next().click()
+          .focused().its('text').should('eq', '01')
+          .focused().type('{rightarrow}')
+          .focused().its('text').should('eq', '31')
+          .focused().type('{rightarrow}')
+          .focused().its('text').should('eq', '2015')
+          .focused().type('{leftarrow}')
+          .focused().its('text').should('eq', '31')
+          .focused().type('{leftarrow}')
+          .focused().its('text').should('eq', '01')
+
